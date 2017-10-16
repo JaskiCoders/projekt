@@ -85,8 +85,8 @@
                         <configuration>
                             <artifactItems>
                                 <artifactItem>
-                                    <groupId>com.mazur</groupId>
-                                    <artifactId>demo-web</artifactId>
+                                    <groupId>pl.com</groupId>
+                                    <artifactId>web</artifactId>
                                     <version>${project.version}</version>
                                     <type>zip</type>
                                 </artifactItem>
