@@ -8,7 +8,7 @@ import pl.com.model.RoleType;
 import java.util.List;
 
 @Repository
-public interface RoleRepository extends JpaRepository<Role,Long> {
+public interface RoleRepository extends JpaRepository<Role, Long> {
 
     List<Role> findAllByType(RoleType type);
 }

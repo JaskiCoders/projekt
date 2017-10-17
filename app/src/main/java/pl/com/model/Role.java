@@ -11,7 +11,7 @@ import javax.validation.constraints.NotNull;
 
 @Entity
 @Data
-@Table(name="role")
+@Table(name = "role")
 @AllArgsConstructor
 public class Role {
     @Id
