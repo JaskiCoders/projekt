@@ -20,10 +20,16 @@ public class User {
     private String login;
     @NotNull
     @Column
+    private String username;
+    @NotNull
+    @Column
     private String password;
     @NotNull
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "id")
     private Role role;
+    @NotNull
+    @Column
+    private boolean enabled;
 
 }
