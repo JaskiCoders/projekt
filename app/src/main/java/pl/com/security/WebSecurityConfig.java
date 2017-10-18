@@ -20,7 +20,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         http
                 .authorizeRequests()
-                .anyRequest().permitAll();
+                .anyRequest().permitAll()
+            .and()
+                .csrf().disable();
+
+        http.headers().frameOptions().disable();
 
     }
 }
