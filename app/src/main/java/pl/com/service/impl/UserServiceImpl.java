@@ -26,4 +26,12 @@ public class UserServiceImpl implements UserService {
     public User findUserByLogin(String login) {
         return userRepository.findByLogin(login);
     }
+
+    public User addNewUser(User user){return userRepository.save(user);}
+
+    public User updateUser(User user){return userRepository.save(user);}
+
+    public void deleteUser(User user){userRepository.delete(user);}
+
+    public void deleteUserById(Long id){userRepository.delete(id);}
 }
