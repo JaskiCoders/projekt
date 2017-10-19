@@ -40,18 +40,19 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    void add(@RequestBody User inputUser) {
-        inputUser.setRole(roleService.findRoleById(3l));
 
+    ResponseEntity<User> add(@RequestBody User inputUser) {
+        inputUser.setRole(roleService.findRoleById(3l));
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
-
         userService.addNewUser(inputUser);
+        return new ResponseEntity<>(inputUser,HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{userId}")
-    void delete(@PathVariable Long userId) {
+    ResponseEntity<String> delete(@PathVariable Long userId) {
         userService.deleteUserById(userId);
+        return new ResponseEntity<String>("User deleted!",HttpStatus.OK);
     }
 }
 
