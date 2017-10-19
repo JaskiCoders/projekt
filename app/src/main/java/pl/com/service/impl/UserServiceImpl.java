@@ -15,8 +15,8 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public User findUserById(Long id) {
-        return userRepository.findOne(id);
+    public User findUserById(String login) {
+        return userRepository.findOne(login);
     }
 
     public List<User> findAllUsers() {
@@ -27,11 +27,19 @@ public class UserServiceImpl implements UserService {
         return userRepository.findByLogin(login);
     }
 
-    public User addNewUser(User user){return userRepository.save(user);}
+    public User addNewUser(User user) {
+        return userRepository.save(user);
+    }
 
-    public User updateUser(User user){return userRepository.save(user);}
+    public User updateUser(User user) {
+        return userRepository.save(user);
+    }
 
-    public void deleteUser(User user){userRepository.delete(user);}
+    public void deleteUser(User user) {
+        userRepository.delete(user);
+    }
 
-    public void deleteUserById(Long id){userRepository.delete(id);}
+    public void deleteUserByLogin(String login) {
+        userRepository.delete(login);
+    }
 }

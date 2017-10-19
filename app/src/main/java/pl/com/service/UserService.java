@@ -5,7 +5,6 @@ import pl.com.model.User;
 import java.util.List;
 
 public interface UserService {
-    User findUserById(Long id);
 
     List<User> findAllUsers();
 
@@ -17,5 +16,5 @@ public interface UserService {
 
     void deleteUser(User user);
 
-    void deleteUserById(Long id);
+    void deleteUserByLogin(String login);
 }
