@@ -14,9 +14,6 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class User {
     @Id
-    @GeneratedValue
-    @Column
-    private Long id;
     @NotNull
     @Column(unique = true)
     private String login;
