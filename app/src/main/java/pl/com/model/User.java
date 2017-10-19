@@ -18,10 +18,10 @@ public class User {
     @Column
     private Long id;
     @NotNull
-    @Column
+    @Column(unique = true)
     private String login;
     @NotNull
-    @Column
+    @Column(unique = true)
     private String username;
     @NotNull
     @Column
