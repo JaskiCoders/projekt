@@ -27,14 +27,14 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<User> user(@PathVariable String login) {
         User user = userService.findUserByLogin(login);
-        return new ResponseEntity<>(user, HttpStatus.OK);
+        return ResponseEntity.ok().body(user);
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     ResponseEntity<List<User>> getUsers() {
         List<User> users = userService.findAllUsers();
-        return new ResponseEntity<>(users, HttpStatus.OK);
+        return ResponseEntity.ok().body(users);
     }
 
     @RequestMapping(method = RequestMethod.POST)
@@ -43,13 +43,13 @@ public class UserController {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
         userService.addNewUser(inputUser);
-        return new ResponseEntity<>(inputUser,HttpStatus.OK);
+        return ResponseEntity.ok().body(inputUser);
     }
 
     @RequestMapping(method = RequestMethod.DELETE, value = "/{login}")
     ResponseEntity<String> delete(@PathVariable String login) {
         userService.deleteUserByLogin(login);
-        return new ResponseEntity<String>("User deleted!",HttpStatus.OK);
+        return ResponseEntity.ok().body("User deleted!");
     }
 }
 
