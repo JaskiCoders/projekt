@@ -6,8 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pl.com.model.Role;
 import pl.com.model.User;
-import pl.com.service.impl.RoleServiceImpl;
 import pl.com.service.impl.UserServiceImpl;
 
 import java.util.List;
@@ -17,14 +17,12 @@ import java.util.List;
 public class UserController {
 
     private UserServiceImpl userService;
-    private RoleServiceImpl roleService;
 
     @Autowired
-    UserController(UserServiceImpl userService,
-                   RoleServiceImpl roleService) {
+    UserController(UserServiceImpl userService) {
         this.userService = userService;
-        this.roleService = roleService;
     }
+
     @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
     @ResponseBody
     public ResponseEntity<User> user(@PathVariable String login) {
@@ -40,9 +38,8 @@ public class UserController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-
     ResponseEntity<User> add(@RequestBody User inputUser) {
-        inputUser.setRole(roleService.findRoleById(3l));
+        inputUser.setRole(Role.USER);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
         userService.addNewUser(inputUser);

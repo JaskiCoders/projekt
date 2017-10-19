@@ -17,16 +17,19 @@ public class User {
     @NotNull
     @Column(unique = true)
     private String login;
+
     @NotNull
     @Column(unique = true)
     private String username;
+
     @NotNull
     @Column
     private String password;
-    @NotNull
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "id")
+
+    @Column(name = "role", nullable = false)
+    @Enumerated(EnumType.STRING)
     private Role role;
+
     @NotNull
     @Column
     private boolean enabled;
