@@ -23,7 +23,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "/{userId}")
+    @RequestMapping(method = RequestMethod.GET, value = "/{login}")
     @ResponseBody
     public ResponseEntity<User> user(@PathVariable String login) {
         User user = userService.findUserByLogin(login);
