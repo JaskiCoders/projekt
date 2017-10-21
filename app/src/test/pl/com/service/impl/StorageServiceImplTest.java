@@ -2,11 +2,14 @@ package pl.com.service.impl;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringBootConfiguration;
+import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,24 +20,19 @@ import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import pl.com.AppApplication;
+import pl.com.TestConfiguration;
 import pl.com.configuration.properties.StorageProperties;
 import pl.com.repository.FileRepository;
 
-@ContextConfiguration
-@TestPropertySource(properties = { "storage.root = test" })
+@TestPropertySource(locations="classpath:application.properties")
+@RunWith(SpringJUnit4ClassRunner.class)
+@SpringBootTest(classes = AppApplication.class)
 public class StorageServiceImplTest {
 
-    @InjectMocks
+    @Autowired
     private StorageServiceImpl storageService;
-    @Mock
-    private FileRepository fileRepository;
-    @Mock
-    private StorageProperties storageProperties;
-
-    @Before
-    public void prepare() {
-        MockitoAnnotations.initMocks(this);
-    }
 
     @Test
     @Rollback

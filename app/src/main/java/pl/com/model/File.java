@@ -17,8 +17,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class File {
     @Id
-    @NotNull
-    @Column(unique = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     @NotNull
     @Column
