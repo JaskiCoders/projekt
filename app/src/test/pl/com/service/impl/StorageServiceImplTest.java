@@ -36,6 +36,8 @@ import static org.mockito.Mockito.when;
 public class StorageServiceImplTest {
 
     @Autowired
+    StorageProperties storageProperties;
+    @Autowired
     private StorageServiceImpl storageService;
 
     @Autowired
@@ -44,15 +46,16 @@ public class StorageServiceImplTest {
     @Test
     @Rollback
     public void store() {
-        MockMultipartFile mockMultipartFile = new MockMultipartFile("foo", "foo.txt", MediaType.TEXT_PLAIN_VALUE,
+        String name = "file";
+        String storedFileame = "file";
+        String originalFilename = "test.txt";
+        MockMultipartFile mockMultipartFile = new MockMultipartFile(name, originalFilename, MediaType.TEXT_PLAIN_VALUE,
                 "Hello World".getBytes());
 
-        storageService.store(mockMultipartFile, "name");
+        storageService.store(mockMultipartFile, storedFileame);
 
-        //when(fileRepository.count()).thenReturn(1L);
+        File file = fileRepository.findOne(storageProperties.getRoot() + "\\" + originalFilename);
 
-        File file = fileRepository.findOne(1L);
-
-        assertThat(file.getFileName()).isEqualTo("name");
+        assertThat(file.getFileName()).isEqualTo(storedFileame);
     }
 }

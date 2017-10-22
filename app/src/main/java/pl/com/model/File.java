@@ -17,9 +17,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 public class File {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    @Column(unique = true)
+    private String pathToFile;
     @NotNull
     @Column
     private String fileName;
@@ -33,7 +34,5 @@ public class File {
     @NotNull
     @Column
     private LocalDateTime modificationDate;
-    @NotNull
-    @Column(unique = true)
-    private String pathToFile;
+
 }

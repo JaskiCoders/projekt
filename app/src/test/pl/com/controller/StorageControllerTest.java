@@ -51,14 +51,13 @@ public class StorageControllerTest {
     @Test
     @Rollback
     public void shouldSaveUploadedFile() throws Exception {
-        MockMultipartFile multipartFile = new MockMultipartFile("file", "test.txt",
+        String name = "file";
+        String originalFilename = "test.txt";
+        MockMultipartFile multipartFile = new MockMultipartFile(name, originalFilename,
                 "text/plain", "Spring Framework".getBytes());
 
-        this.mvc.perform(fileUpload("/api/file").file(multipartFile).param("fileName", "file"))
+        this.mvc.perform(fileUpload("/api/file").file(multipartFile).param("fileName", name))
                 .andExpect(status().isOk());
-                //.andExpect(jsonPath("fileName", is("file")));
-
-        //then(this.storageService).should().store(multipartFile, "file");
     }
 
 }

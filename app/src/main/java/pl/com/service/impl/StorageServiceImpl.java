@@ -58,10 +58,10 @@ public class StorageServiceImpl implements StorageService {
 
             //todo add user
             File newFile = File.builder()
+                    .pathToFile(rootLocation.resolve(filename).toString())
                     .fileName(fileName)
                     .createDate(LocalDateTime.now())
                     .modificationDate(LocalDateTime.now())
-                    .pathToFile(rootLocation.toString())
                     .build();
 
             Files.copy(file.getInputStream(), rootLocation.resolve(filename),

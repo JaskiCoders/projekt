@@ -6,5 +6,5 @@ import pl.com.model.File;
 import pl.com.model.User;
 
 @Repository
-public interface FileRepository extends JpaRepository<File, Long> {
+public interface FileRepository extends JpaRepository<File, String> {
 }
