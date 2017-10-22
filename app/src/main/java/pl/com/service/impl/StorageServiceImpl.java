@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import pl.com.exception.StorageException;
-import pl.com.model.File;
+import pl.com.model.storage.File;
 import pl.com.configuration.properties.StorageProperties;
 import pl.com.repository.FileRepository;
 import pl.com.service.StorageService;

@@ -1,12 +1,9 @@
 package pl.com.service;
 
-import org.springframework.core.io.Resource;
 import org.springframework.web.multipart.MultipartFile;
-import pl.com.model.File;
+import pl.com.model.storage.File;
 
-import java.nio.file.Path;
 import java.util.List;
-import java.util.stream.Stream;
 
 public interface StorageService {
 

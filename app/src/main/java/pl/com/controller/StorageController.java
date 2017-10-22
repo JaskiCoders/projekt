@@ -8,8 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import pl.com.configuration.properties.StorageProperties;
-import pl.com.model.File;
+import pl.com.model.storage.File;
 import pl.com.service.StorageService;
 
 import java.util.List;

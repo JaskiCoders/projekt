@@ -1,10 +1,11 @@
-package pl.com.model;
+package pl.com.model.storage;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
+import pl.com.model.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
