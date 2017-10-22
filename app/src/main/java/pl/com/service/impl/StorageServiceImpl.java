@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Component
 public class StorageServiceImpl implements StorageService {
@@ -33,9 +34,15 @@ public class StorageServiceImpl implements StorageService {
         this.storageProperties = storageProperties;
 
         this.rootLocation = Paths.get(storageProperties.getRoot());
+
+        try {
+            Files.createDirectories(this.rootLocation);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void store(MultipartFile file, String fileName) {
+    public File store(MultipartFile file, String fileName) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -61,9 +68,13 @@ public class StorageServiceImpl implements StorageService {
                     StandardCopyOption.REPLACE_EXISTING);
 
             fileRepository.save(newFile);
+
+            return newFile;
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
         }
     }
+
+    public List<File> findAllFiles() { return fileRepository.findAll(); }
 }

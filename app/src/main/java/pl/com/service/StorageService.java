@@ -5,14 +5,16 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.com.model.File;
 
 import java.nio.file.Path;
+import java.util.List;
 import java.util.stream.Stream;
 
 public interface StorageService {
 
 //    void init();
 
-    void store(MultipartFile file, String fileName);
+    File store(MultipartFile file, String fileName);
 
+    List<File> findAllFiles();
 //    Stream<Path> loadAll();
 //
 //    Path load(String filename);
