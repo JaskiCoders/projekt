@@ -49,7 +49,14 @@ public class StorageServiceImpl implements StorageService {
                                 + filename);
             }
 
-            File newFile = File.builder().fileName(fileName).createDate(LocalDateTime.now()).pathToFile(rootLocation.toString()).build();
+            //todo add user
+            File newFile = File.builder()
+                    .fileName(fileName)
+                    .createDate(LocalDateTime.now())
+                    .modificationDate(LocalDateTime.now())
+                    .pathToFile(rootLocation.toString())
+                    .build();
+
             Files.copy(file.getInputStream(), rootLocation.resolve(filename),
                     StandardCopyOption.REPLACE_EXISTING);
 

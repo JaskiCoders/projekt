@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @Table(name = "file ")
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -22,7 +23,8 @@ public class File {
     @NotNull
     @Column
     private String fileName;
-    @NotNull
+    //todo add user as notnull
+    //@NotNull
     @ManyToOne
     private User author;
     @NotNull
