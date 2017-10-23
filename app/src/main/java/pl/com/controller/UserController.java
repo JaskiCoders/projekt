@@ -42,6 +42,7 @@ public class UserController {
         inputUser.setRole(Role.ROLE_USER);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
+        inputUser.setEnabled(true);
         userService.addNewUser(inputUser);
         return ResponseEntity.ok().body(inputUser);
     }

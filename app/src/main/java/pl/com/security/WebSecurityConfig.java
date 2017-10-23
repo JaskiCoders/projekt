@@ -35,8 +35,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .httpBasic()
                 .and()
                 .authorizeRequests()
-                .antMatchers("/index.html", "/home.html", "/login.html", "/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*").permitAll()
-                .antMatchers("/admin","/console/**").hasRole("ADMIN")
+                .antMatchers("/index.html","/console/**", "/home.html", "/login.html", "/usersList.html", "/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*").permitAll()
+                .antMatchers("/admin").hasRole("ADMIN")
                 .anyRequest().fullyAuthenticated()
                 .and()
                 .formLogin()
@@ -45,10 +45,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .permitAll()
-                .and()
-                .headers().frameOptions().disable();
+                .and();
         http.exceptionHandling().accessDeniedPage("/403");
-        http.headers().frameOptions().disable();
+        http.csrf().disable();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
