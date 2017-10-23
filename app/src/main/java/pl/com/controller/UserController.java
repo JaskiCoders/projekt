@@ -39,7 +39,7 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<User> add(@RequestBody User inputUser) {
-        inputUser.setRole(Role.USER);
+        inputUser.setRole(Role.ROLE_USER);
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         inputUser.setPassword(passwordEncoder.encode(inputUser.getPassword()));
         userService.addNewUser(inputUser);

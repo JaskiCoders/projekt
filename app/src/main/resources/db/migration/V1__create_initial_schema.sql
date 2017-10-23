@@ -7,4 +7,4 @@ CREATE CACHED TABLE PUBLIC.USER(
 );
 ALTER TABLE PUBLIC.USER ADD CONSTRAINT PUBLIC.UNIQUE_LOGIN PRIMARY KEY(LOGIN);
 
-insert into user values ('admin',true,'testadmin','ADMIN','Administrator')
+insert into user values ('admin',true,'$2a$04$Uyub1RLGeJY1TTbJlFHEf.DywgMac99XD9dle/WDm7eHBXRpaFI.q','ROLE_ADMIN','Administrator')
