@@ -31,23 +31,30 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .httpBasic()
-                .and()
+                http
                 .authorizeRequests()
-                .antMatchers("/index.html","/console/**", "/home.html", "/login.html", "/usersList.html", "/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*").permitAll()
-                .antMatchers("/admin").hasRole("ADMIN")
-                .anyRequest().fullyAuthenticated()
+                .anyRequest().permitAll()
                 .and()
-                .formLogin()
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .and()
-                .logout()
-                .permitAll()
-                .and();
-        http.exceptionHandling().accessDeniedPage("/403");
-        http.csrf().disable();
+                .csrf().disable();
+
+        http.headers().frameOptions().disable();
+//        http
+//                .httpBasic()
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers("/index.html","/console/**", "/home.html", "/login.html", "/usersList.html", "/js/*", "/js/*/*", "/", "/css/*", "/img/*", "/fonts/*").permitAll()
+//                .antMatchers("/admin").hasRole("ADMIN")
+//                .anyRequest().fullyAuthenticated()
+//                .and()
+//                .formLogin()
+//                .usernameParameter("username")
+//                .passwordParameter("password")
+//                .and()
+//                .logout()
+//                .permitAll()
+//                .and();
+//        http.exceptionHandling().accessDeniedPage("/403");
+//        http.csrf().disable();
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
