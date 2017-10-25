@@ -50,6 +50,6 @@ public class RegistrationController {
 
         user.setEnabled(true);
         service.saveRegisteredUser(user);
-        return  ResponseEntity.badRequest().body("Account registered!");
+        return  ResponseEntity.ok().body("Account registered!");
     }
 }
