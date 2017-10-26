@@ -14,10 +14,9 @@ public interface FileService {
     void deleteFile(String pathToFile);
 //    Stream<Path> loadAll();
 //
-//    Path load(String filename);
+    File load(String pathToFile);
 //
 //    Resource loadAsResource(String filename);
 //
     void deleteAllFiles();
-
 }
