@@ -24,14 +24,14 @@ public class RegistrationController {
     private UserVerificationService service;
     private MessageSource messages;
     @Autowired
-    public RegistrationController(UserVerificationService service,MessageSource messages){
+    public RegistrationController(UserVerificationService service, MessageSource messages){
         this.service = service;
         this.messages = messages;
     }
 
     @RequestMapping(value = "/regitrationConfirm", method = RequestMethod.GET)
     public ResponseEntity<String> confirmRegistration
-            (WebRequest request, Model model, @RequestParam("token") String token) {
+            (WebRequest request, @RequestParam("token") String token) {
 
         Locale locale = request.getLocale();
 
@@ -43,8 +43,6 @@ public class RegistrationController {
         User user = verificationToken.getUser();
         Calendar cal = Calendar.getInstance();
         if ((verificationToken.getExpiryDate().getTime() - cal.getTime().getTime()) <= 0) {
-            String messageValue = messages.getMessage("auth.message.expired", null, locale);
-            model.addAttribute("message", messageValue);
             return  ResponseEntity.badRequest().body("Token expired!");
         }
 
