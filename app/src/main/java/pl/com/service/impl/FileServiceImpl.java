@@ -1,5 +1,6 @@
 package pl.com.service.impl;
 
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -8,7 +9,7 @@ import pl.com.exception.StorageException;
 import pl.com.model.storage.File;
 import pl.com.configuration.properties.StorageProperties;
 import pl.com.repository.FileRepository;
-import pl.com.service.StorageService;
+import pl.com.service.FileService;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,19 +20,17 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Component
-public class StorageServiceImpl implements StorageService {
+public class FileServiceImpl implements FileService {
 
     private FileRepository fileRepository;
-    private StorageProperties storageProperties;
 
     private final Path rootLocation;
 
     @Autowired
-    public StorageServiceImpl(FileRepository fileRepository,
-                              StorageProperties storageProperties) {
+    public FileServiceImpl(FileRepository fileRepository,
+                           StorageProperties storageProperties) {
 
         this.fileRepository = fileRepository;
-        this.storageProperties = storageProperties;
 
         this.rootLocation = Paths.get(storageProperties.getRoot());
 
@@ -42,7 +41,7 @@ public class StorageServiceImpl implements StorageService {
         }
     }
 
-    public File store(MultipartFile file, String fileName) {
+    public File saveFile(MultipartFile file, String fileName) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
 
         try {
@@ -50,7 +49,6 @@ public class StorageServiceImpl implements StorageService {
                 throw new StorageException("Failed to store empty file " + filename);
             }
             if (filename.contains("..")) {
-                // This is a security check
                 throw new StorageException(
                         "Cannot store file with relative path outside current directory "
                                 + filename);
@@ -67,9 +65,7 @@ public class StorageServiceImpl implements StorageService {
             Files.copy(file.getInputStream(), rootLocation.resolve(filename),
                     StandardCopyOption.REPLACE_EXISTING);
 
-            fileRepository.save(newFile);
-
-            return newFile;
+            return fileRepository.save(newFile);
         }
         catch (IOException e) {
             throw new StorageException("Failed to store file " + filename, e);
@@ -77,4 +73,17 @@ public class StorageServiceImpl implements StorageService {
     }
 
     public List<File> findAllFiles() { return fileRepository.findAll(); }
+
+    public void deleteFile(String pathToFile) {
+        fileRepository.delete(pathToFile);
+        try {
+            Files.delete(Paths.get(pathToFile));
+        } catch (IOException e) {
+            throw new StorageException("Failed to delete file " + pathToFile);
+        }
+    }
+
+    public void deleteAllFiles() {
+        fileRepository.deleteAll();
+    }
 }

@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
 
@@ -20,6 +17,9 @@ import java.util.Set;
 @NoArgsConstructor
 public class Folder {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
     @NotNull
     @Column
     private String folderName;

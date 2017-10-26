@@ -23,7 +23,6 @@ public class Estimation {
     @NotNull
     @Column
     String title;
-    @NotNull
-    @Column
+    @OneToOne
     Folder repository;
 }

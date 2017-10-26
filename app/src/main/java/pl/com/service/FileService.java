@@ -5,19 +5,19 @@ import pl.com.model.storage.File;
 
 import java.util.List;
 
-public interface StorageService {
+public interface FileService {
 
-//    void init();
-
-    File store(MultipartFile file, String fileName);
+    File saveFile(MultipartFile file, String fileName);
 
     List<File> findAllFiles();
+
+    void deleteFile(String pathToFile);
 //    Stream<Path> loadAll();
 //
 //    Path load(String filename);
 //
 //    Resource loadAsResource(String filename);
 //
-//    void deleteAll();
+    void deleteAllFiles();
 
 }

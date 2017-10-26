@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import pl.com.model.storage.File;
-import pl.com.service.StorageService;
+import pl.com.service.FileService;
 
 import java.util.List;
 
@@ -17,23 +17,23 @@ import java.util.List;
 @RequestMapping("/api/file")
 public class StorageController {
 
-    private final StorageService storageService;
+    private final FileService fileService;
 
     @Autowired
-    public StorageController(StorageService storageService) {
-        this.storageService = storageService;
+    public StorageController(FileService fileService) {
+        this.fileService = fileService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
     ResponseEntity<List<File>> getFiles() {
-        return ResponseEntity.ok().body(storageService.findAllFiles());
+        return ResponseEntity.ok().body(fileService.findAllFiles());
     }
 
     @RequestMapping(method = RequestMethod.POST)
     @ResponseBody
     ResponseEntity<File> postFile(@RequestParam("file") MultipartFile file, @RequestParam("fileName") String fileName) {
-        File returnFile = storageService.store(file, fileName);
+        File returnFile = fileService.save(file, fileName);
         return ResponseEntity.ok().body(returnFile);
     }
 }

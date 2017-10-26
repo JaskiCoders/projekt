@@ -19,12 +19,12 @@ import static org.assertj.core.api.Assertions.assertThat;
 @TestPropertySource(locations="classpath:application.properties")
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = AppApplication.class)
-public class StorageServiceImplTest {
+public class FileServiceImplTest {
 
     @Autowired
     StorageProperties storageProperties;
     @Autowired
-    private StorageServiceImpl storageService;
+    private FileServiceImpl storageService;
 
     @Autowired
     FileRepository fileRepository;
@@ -38,7 +38,7 @@ public class StorageServiceImplTest {
         MockMultipartFile mockMultipartFile = new MockMultipartFile(name, originalFilename, MediaType.TEXT_PLAIN_VALUE,
                 "Hello World".getBytes());
 
-        storageService.store(mockMultipartFile, storedFileame);
+        storageService.saveFile(mockMultipartFile, storedFileame);
 
         File file = fileRepository.findOne(storageProperties.getRoot() + "\\" + originalFilename);
 
